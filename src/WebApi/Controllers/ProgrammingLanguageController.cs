@@ -3,6 +3,7 @@ using Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLangua
 using Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
 using Application.Features.ProgrammingLanguages.Dtos;
 using Application.Features.ProgrammingLanguages.Models;
+using Application.Features.ProgrammingLanguages.Queries.GetByIdProgrammingLanguage;
 using Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLanguage;
 using Core.Application.Requests;
 using MediatR;
@@ -39,7 +40,6 @@ namespace WebApi.Controllers
             return Created("", result);
         }
 
-
         [HttpGet("getlist")]
         public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
         {
@@ -49,7 +49,13 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetById([FromRoute] GetByIdProgrammingLanguageQuery query)
+        {
+            var result = await Mediator.Send(query);
 
+            return Ok(result);
+        }
 
     }
 }
