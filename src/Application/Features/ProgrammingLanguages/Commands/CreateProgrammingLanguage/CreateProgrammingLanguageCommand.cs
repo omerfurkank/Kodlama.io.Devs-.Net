@@ -19,22 +19,18 @@ namespace Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLa
         {
             private readonly IProgrammingLanguageRepository _programmingLanguageRepository;
             private readonly IMapper _mapper;
-            //private readonly ProgrammingLanguageRules _programmingLanguageRules;
 
             public CreateProgrammingLanguageCommandHandler(IProgrammingLanguageRepository programmingLanguageRepository, IMapper mapper)
             {
                 _programmingLanguageRepository = programmingLanguageRepository;
                 _mapper = mapper;
-                //_programmingLanguageRules = programmingLanguageRules;
             }
 
             public async Task<CreatedProgrammingLanguageDto> Handle(CreateProgrammingLanguageCommand request, CancellationToken cancellationToken)
             {
-                //await _programmingLanguageRules.ProgrammingLanguageNameCanNotBeDuplicatedWhenInserted(request.Name);
-
-                ProgrammingLanguage mappedProgrammingLanguage = _mapper.Map<ProgrammingLanguage>(request);
-                ProgrammingLanguage createdProgrammingLanguage = await _programmingLanguageRepository.AddAsync(mappedProgrammingLanguage);
-                CreatedProgrammingLanguageDto createdProgrammingLanguageDto = _mapper.Map<CreatedProgrammingLanguageDto>(createdProgrammingLanguage);
+                var mappedProgrammingLanguage = _mapper.Map<ProgrammingLanguage>(request);
+                var createdProgrammingLanguage = await _programmingLanguageRepository.AddAsync(mappedProgrammingLanguage);
+                var createdProgrammingLanguageDto = _mapper.Map<CreatedProgrammingLanguageDto>(createdProgrammingLanguage);
 
                 return createdProgrammingLanguageDto;
             }

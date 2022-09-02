@@ -1,5 +1,10 @@
 ﻿using Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLanguage;
+using Application.Features.ProgrammingLanguages.Commands.DeleteProgrammingLanguage;
+using Application.Features.ProgrammingLanguages.Commands.UpdateProgrammingLanguage;
 using Application.Features.ProgrammingLanguages.Dtos;
+using Application.Features.ProgrammingLanguages.Models;
+using Application.Features.ProgrammingLanguages.Queries.GetListProgrammingLanguage;
+using Core.Application.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,13 +15,41 @@ namespace WebApi.Controllers
     [ApiController]
     public class ProgrammingLanguageController : BaseController
     {
-        [HttpPost]
-        public async Task<IActionResult> Add([FromBody] CreateProgrammingLanguageCommand createProgrammingLanguageCommand)
+        [HttpPost("add")]
+        public async Task<IActionResult> Add([FromBody] CreateProgrammingLanguageCommand command)
         {
-            CreatedProgrammingLanguageDto result = await Mediator.Send(createProgrammingLanguageCommand);
+            var result = await Mediator.Send(command);
+
             return Created("", result);
         }
 
-       
+        [HttpPost("update")]
+        public async Task<IActionResult> Update([FromBody] UpdateProgrammingLanguageCommand command)
+        {
+            var result = await Mediator.Send(command);
+
+            return Created("", result);
+        }
+
+        [HttpPost("delete")]
+        public async Task<IActionResult> Delete([FromBody] DeleteProgrammingLanguageCommand command)
+        {
+            var result = await Mediator.Send(command);
+
+            return Created("", result);
+        }
+
+
+        [HttpGet("getlist")]
+        public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
+        {
+            GetListProgrammingLanguageQuery getListProgrammingLanguageQuery = new() { PageRequest = pageRequest };
+            ProgrammingLanguageListModel result = await Mediator.Send(getListProgrammingLanguageQuery);
+
+            return Ok(result);
+        }
+
+
+
     }
 }
