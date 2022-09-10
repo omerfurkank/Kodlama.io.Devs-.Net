@@ -35,9 +35,9 @@ namespace Application.Features.ProgrammingLanguages.Commands.CreateProgrammingLa
 
                 var mappedProgrammingLanguage = _mapper.Map<ProgrammingLanguage>(request);
                 var createdProgrammingLanguage = await _programmingLanguageRepository.AddAsync(mappedProgrammingLanguage);
-                var createdProgrammingLanguageDto = _mapper.Map<CreatedProgrammingLanguageDto>(createdProgrammingLanguage);
+                var programmingLanguageToReturn = _mapper.Map<CreatedProgrammingLanguageDto>(createdProgrammingLanguage);
 
-                return createdProgrammingLanguageDto;
+                return programmingLanguageToReturn;
             }
         }
 

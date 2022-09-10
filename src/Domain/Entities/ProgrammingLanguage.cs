@@ -10,9 +10,11 @@ namespace Domain.Entities
     public class ProgrammingLanguage : Entity
     {
         public string Name { get; set; }
+        public ICollection<Technology>? Technologies { get; set; }
 
         public ProgrammingLanguage()
         {
+            Technologies = new List<Technology>();
         }
 
         public ProgrammingLanguage(int id, string name) : this()

@@ -44,7 +44,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
         {
             GetListProgrammingLanguageQuery getListProgrammingLanguageQuery = new() { PageRequest = pageRequest };
-            ProgrammingLanguageListModel result = await Mediator.Send(getListProgrammingLanguageQuery);
+            var result = await Mediator.Send(getListProgrammingLanguageQuery);
 
             return Ok(result);
         }
