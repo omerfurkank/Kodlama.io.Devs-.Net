@@ -2,6 +2,7 @@
 using Application.Features.Technologies.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
+using Core.Application.Pipelines.Authorization;
 using Domain.Entities;
 using MediatR;
 using System;
@@ -12,11 +13,12 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Technologies.Commands.UpdateTechnology
 {
-    public class UpdateTechnologyCommand : IRequest<UpdatedTechnologyDto>
+    public class UpdateTechnologyCommand : IRequest<UpdatedTechnologyDto>, ISecuredRequest
     {
         public int Id { get; set; }
         public int ProgrammingLanguageId { get; set; }
         public string Name { get; set; }
+        public string[] Roles => new string[] { "admin" };
 
         public class UpdateTechnologyCommandHandler : IRequestHandler<UpdateTechnologyCommand, UpdatedTechnologyDto>
         {
