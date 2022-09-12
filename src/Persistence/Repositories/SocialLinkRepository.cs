@@ -5,10 +5,11 @@ using Persistence.Contexts;
 
 namespace Persistence.Repositories
 {
-    public class TechnologyRepository : EfRepositoryBase<Technology, BaseDbContext>, ITechnologyRepository
+    public class SocialLinkRepository : EfRepositoryBase<SocialLink, BaseDbContext>, ISocialLinkRepository
     {
-        public TechnologyRepository(BaseDbContext context) : base(context)
+        public SocialLinkRepository(BaseDbContext context) : base(context)
         {
         }
+
     }
 }
